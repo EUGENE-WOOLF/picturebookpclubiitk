@@ -1,6 +1,8 @@
-const express = require("express");
+import express from "express";
+import { generateStory } from "../controllers/story.controller.js";
+
 const router = express.Router();
 
-router.get("/", (req, res) => {
-  res.send("Story route is working!");
-});
+router.post("/generate", generateStory); // User sends prompt here
+
+export default router;
