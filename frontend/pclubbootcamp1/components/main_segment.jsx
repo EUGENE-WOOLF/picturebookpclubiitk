@@ -92,25 +92,51 @@ export default function MainSegment() {
       </motion.div>
 
       {/* Story display */}
-      {story && (
+      {story?.segments?.map((seg, idx) => (
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.2, duration: 0.6 }}
-          className="mt-8 w-full max-w-3xl space-y-6"
+          key={idx}
+          initial={{ opacity: 0, y: 30, scale: 0.95 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ delay: idx * 0.2, duration: 0.6, ease: "easeOut" }}
+          className="relative max-w-3xl w-full mx-auto my-8 bg-gradient-to-br from-pink-50 via-white to-indigo-50 border-4 border-indigo-200 
+               rounded-3xl shadow-xl p-8 prose prose-lg text-gray-800
+               hover:shadow-2xl transition-shadow"
         >
-          <h2 className="text-2xl font-semibold">{story.title}</h2>
-          {story.segments.map((seg, idx) => (
-            <div
-              key={idx}
-              className="bg-white p-5 rounded-2xl shadow-md hover:shadow-lg transition-shadow"
+          {/* Decorative corner accents */}
+          <div className="absolute top-0 left-0 w-12 h-12 border-t-4 border-l-4 border-indigo-300 rounded-tl-3xl"></div>
+          <div className="absolute top-0 right-0 w-12 h-12 border-t-4 border-r-4 border-indigo-300 rounded-tr-3xl"></div>
+          <div className="absolute bottom-0 left-0 w-12 h-12 border-b-4 border-l-4 border-indigo-300 rounded-bl-3xl"></div>
+          <div className="absolute bottom-0 right-0 w-12 h-12 border-b-4 border-r-4 border-indigo-300 rounded-br-3xl"></div>
+
+          {/* Title like a chapter heading */}
+          <h3 className="text-2xl font-bold mb-4 text-center text-indigo-700 drop-shadow-sm">
+            {seg.title}
+          </h3>
+
+          {/* Story text */}
+          <p className="whitespace-pre-line leading-relaxed text-gray-700 text-lg italic text-center">
+            {seg.content}
+          </p>
+
+          {/* Picture in a framed style */}
+          {seg.imageUrl && (
+            <motion.div
+              className="mt-6 flex justify-center"
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: idx * 0.25 + 0.3, duration: 0.6 }}
             >
-              <h3 className="text-lg font-medium mb-2">{seg.title}</h3>
-              <p className="text-gray-700 whitespace-pre-line">{seg.content}</p>
-            </div>
-          ))}
+              <div className="p-2 border-4 border-pink-200 bg-white rounded-2xl shadow-md">
+                <img
+                  src={`http://localhost:4000${seg.imageUrl}`}
+                  alt={seg.title}
+                  className="max-h-[400px] rounded-xl object-cover"
+                />
+              </div>
+            </motion.div>
+          )}
         </motion.div>
-      )}
+      ))}
     </div>
   );
 }

@@ -3,7 +3,7 @@ import fs from "node:fs";
 import path from "path";
 
 const ai = new GoogleGenAI({
-  apiKey: "AIzaSyDAu1jQbBlnR-7hBgF_X-svi6fHQQBtoCs",
+  apiKey: "",
   // store your key in .env
 });
 

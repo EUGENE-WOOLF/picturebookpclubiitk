@@ -1,13 +1,19 @@
 import { generateStoryFromGemini } from "../services/story.service.js";
+import { generateImagesForStory } from "../services/image.service.js";
 
 export const generateStory = async (req, res, next) => {
   try {
-    const { prompt } = req.body; // Get user prompt
+    const { prompt } = req.body;
     if (!prompt) return res.status(400).json({ message: "Prompt is required" });
 
-    const story = await generateStoryFromGemini(prompt); // Call service
-    res.json({ story }); // Return story to frontend
+    // Generate story text first
+    const story = await generateStoryFromGemini(prompt);
+
+    // Generate images for each segment
+    const storyWithImages = await generateImagesForStory(story);
+
+    res.json({ story: storyWithImages });
   } catch (err) {
-    next(err); // Forward error to global handler
+    next(err);
   }
 };
