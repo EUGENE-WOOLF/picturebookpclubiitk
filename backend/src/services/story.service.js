@@ -30,7 +30,6 @@ The JSON must follow this exact structure:
     `,
   });
 
-  // ✅ Clean text and parse
   let text = response.text;
   text = text.replace(/```json|```/g, "").trim(); // remove markdown fences
 
