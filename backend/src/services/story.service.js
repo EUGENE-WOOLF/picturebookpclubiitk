@@ -10,7 +10,7 @@ export async function generateStoryFromGemini(prompt) {
     model: "gemini-2.5-flash",
     contents: `
 You are a creative story writer. Based on the following prompt: "${prompt}", 
-write a children's story as a **valid JSON object**.
+write a story as a **valid JSON object**.
 
 The JSON must follow this exact structure:
 
@@ -24,7 +24,7 @@ The JSON must follow this exact structure:
 
 - Return ONLY valid JSON, no \`\`\` fences, no extra text.
 - Keep the story around 500 words.
-- Language should be simple, suitable for children.
+- Language should be family friendly but the story should be mature and should take itself seriously.
 - Each segment must have a short descriptive title and content.
     `,
   });
