@@ -2,7 +2,8 @@ import { GoogleGenAI } from "@google/genai";
 import * as fs from "node:fs";
 
 const ai = new GoogleGenAI({
-  apiKey: "AIzaSyDAu1jQbBlnR-7hBgF_X-svi6fHQQBtoCs",
+  //add your API key here
+  apiKey: "",
 });
 
 export async function generateStoryFromGemini(prompt) {
